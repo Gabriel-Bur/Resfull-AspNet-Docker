@@ -11,6 +11,22 @@ namespace Calculator.Controllers
     [Route("api/Calculator")]
     public class CalculatorController : Controller
     {
+        public string Index()
+        {
+            string message = "Calculator Operations => " +
+                "   Sum / Subtraction / Multiplication / Division / Mean / SquareRoot" +
+                "  \n \n \n " +
+                "Sum/{firstNumber}/{secondNumber}" +
+                "Sub/{firstNumber}/{secondNumber}" +
+                "Multiply/{firstNumber}/{secondNumber}" +
+                "Div/{firstNumber}/{secondNumber}" +
+                "Mean/{firstNumber}/{secondNumber}" +
+                "SquareRoot/{firstNumber}";
+
+            return message;
+        }
+
+
         // Get api/Calculator/Sum/5/5
         [HttpGet("Sum/{firstNumber}/{secondNumber}")]
         public IActionResult Sum(string firstNumber, string secondNumber)
