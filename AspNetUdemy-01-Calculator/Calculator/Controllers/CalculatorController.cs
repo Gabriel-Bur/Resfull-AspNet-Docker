@@ -14,14 +14,7 @@ namespace Calculator.Controllers
         public string Index()
         {
             string message = "Calculator Operations => " +
-                "   Sum / Subtraction / Multiplication / Division / Mean / SquareRoot" +
-                "  \n \n \n " +
-                "Sum/{firstNumber}/{secondNumber}" +
-                "Sub/{firstNumber}/{secondNumber}" +
-                "Multiply/{firstNumber}/{secondNumber}" +
-                "Div/{firstNumber}/{secondNumber}" +
-                "Mean/{firstNumber}/{secondNumber}" +
-                "SquareRoot/{firstNumber}";
+                "Sum / Subtraction / Multiplication / Division / Mean / SquareRoot";
 
             return message;
         }
