@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using HTTPVerbs.Services;
 using Microsoft.AspNetCore.Mvc;
+using HTTPVerbs.Model;
 
 namespace HTTPVerbs.Controllers
 {
@@ -11,36 +8,61 @@ namespace HTTPVerbs.Controllers
     [Route("api/Persons")]
     public class PersonsController : Controller
     {
+
+        private IPersonService _personService { get; set; }
+        public PersonsController(IPersonService personService)
+        {
+            _personService = personService;
+        }
+
+
+
         // GET: api/Persons
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_personService.FingAll());
         }
+
 
         // GET: api/Persons/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public IActionResult Get(long id)
         {
-            return "value";
+            Person person = _personService.FindById(id);
+            if (person.Equals(null))
+            {
+                return NotFound();
+            }
+
+            return Ok(person);
         }
         
+
         // POST: api/Persons
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]Person person)
         {
+            if (person == null) return BadRequest();
+            return new ObjectResult(_personService.Create(person));
         }
         
+
         // PUT: api/Persons/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put([FromBody]Person person)
         {
+            if (person == null) return BadRequest();
+            return new ObjectResult(_personService.Update(person));
         }
         
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _personService.Delete(id);
+            return NoContent();
         }
     }
 }

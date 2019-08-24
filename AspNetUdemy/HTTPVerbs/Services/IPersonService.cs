@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HTTPVerbs.Services
 {
-    interface IPersonService
+    public interface IPersonService
     {
         Person Create(Person person);
         Person FindById(long id);
