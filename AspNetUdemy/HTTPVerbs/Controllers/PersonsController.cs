@@ -5,7 +5,8 @@ using HTTPVerbs.Model;
 namespace HTTPVerbs.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Persons")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/Persons")]
     public class PersonsController : Controller
     {
 

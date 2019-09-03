@@ -7,6 +7,7 @@ using HTTPVerbs.Services;
 using HTTPVerbs.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,6 +38,14 @@ namespace HTTPVerbs
 
             //Dependency Injection
             services.AddScoped<IPersonService, PersonService>();
+
+            //Api Versioning
+            services.AddApiVersioning(v =>
+            {
+                v.AssumeDefaultVersionWhenUnspecified = true;
+                v.ReportApiVersions = true;
+                v.DefaultApiVersion = new ApiVersion(1, 1);
+            });
 
             //Swagger Doc
             services.AddSwaggerGen(c =>
